@@ -21,25 +21,85 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="337dp"
         android:layout_marginLeft="@dimen/marginIzq"
         android:layout_marginTop="@dimen/marginTopTitle"
         android:layout_marginRight="@dimen/marginDer"
-        android:textAlignment="center"
-        android:orientation="vertical">
+        android:background="@color/primary_light"
+        android:orientation="vertical"
+        android:textAlignment="center">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/secondary_text"
-            android:hint="Nombre del Artista"
-            android:textSize="@dimen/textoCuadros"></TextView>
+            android:background="@color/icons"
+            android:hint="@string/artista"
+            android:inputType="text"
+            android:textColor="@color/primary_text"
+            android:textSize="@dimen/textoCuadros">
 
-        <EditText
+        </TextView>
+
+        <TextView
             android:id="@+id/etFecha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/textoCuadros"
+            android:background="@color/icons"
+            android:clickable="true"
             android:focusable="false"
-            android:inputType="date"></EditText>
+            android:hint="@string/fechaEjemplo"
+            android:inputType="date"
+            android:maxLines="1"
+            android:textColor="@color/primary_text"
+            android:textSize="@dimen/textoCuadros"></TextView>
+
+        <Spinner
+            android:id="@+id/spGenero"
+            android:background="@color/icons"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/textoCuadros"
+            android:layout_marginTop="@dimen/textoCuadros"
+            android:scrollbarSize="@dimen/textoCuadros">
+
+        </Spinner>
+
+        <TextView
+            android:id="@+id/valorEntrada"
+            android:background="@color/icons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/textoCuadros"
+            android:hint="@string/valor"
+            android:textSize="@dimen/textoCuadros">
+
+        </TextView>
+        <Spinner
+            android:id="@+id/spEvaluacion"
+            android:background="@color/icons"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/textoCuadros"
+            android:layout_marginTop="@dimen/textoCuadros"
+            android:scrollbarSize="@dimen/textoCuadros">
+
+        </Spinner>
     </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="@dimen/textoCuadros"
+        android:background="@color/primary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <Button
+            android:id="@+id/guardar"
+            android:layout_marginTop="@dimen/textoCuadros"
+            android:text="REGISTRAR"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/textoTitulo">
+
+        </Button>
+
+    </LinearLayout>
+
 </LinearLayout>
