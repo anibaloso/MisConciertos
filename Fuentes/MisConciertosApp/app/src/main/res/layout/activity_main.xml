@@ -29,7 +29,7 @@
         android:orientation="vertical"
         android:textAlignment="center">
 
-        <TextView
+        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/icons"
@@ -38,7 +38,7 @@
             android:textColor="@color/primary_text"
             android:textSize="@dimen/textoCuadros">
 
-        </TextView>
+        </EditText>
 
         <TextView
             android:id="@+id/etFecha"
@@ -64,16 +64,17 @@
 
         </Spinner>
 
-        <TextView
+        <EditText
             android:id="@+id/valorEntrada"
             android:background="@color/icons"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/textoCuadros"
+            android:inputType="number"
             android:hint="@string/valor"
             android:textSize="@dimen/textoCuadros">
 
-        </TextView>
+        </EditText>
         <Spinner
             android:id="@+id/spEvaluacion"
             android:background="@color/icons"
@@ -83,15 +84,13 @@
             android:scrollbarSize="@dimen/textoCuadros">
 
         </Spinner>
+
     </LinearLayout>
-    <LinearLayout
-        android:layout_marginTop="@dimen/textoCuadros"
-        android:background="@color/primary"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+
         <Button
             android:id="@+id/guardar"
+            android:layout_marginLeft="@dimen/marginIzq"
+            android:layout_marginRight="@dimen/marginDer"
             android:layout_marginTop="@dimen/textoCuadros"
             android:text="REGISTRAR"
             android:layout_width="match_parent"
@@ -100,6 +99,6 @@
 
         </Button>
 
-    </LinearLayout>
+
 
 </LinearLayout>

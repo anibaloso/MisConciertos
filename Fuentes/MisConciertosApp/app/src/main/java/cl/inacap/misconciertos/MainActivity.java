@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,12 +19,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import cl.inacap.misconciertos.dto.valorEntradas;
-
 public class MainActivity extends AppCompatActivity {
 
-    private List<cl.inacap.misconciertos.dto.valorEntradas> entradas=new ArrayList<>();
+    //private List<String> entradas=new ArrayList<>();
 
+    TextView valorEm;
     TextView tvFecha;
     Calendar calendario;
     int day,month,year;
@@ -32,19 +32,9 @@ public class MainActivity extends AppCompatActivity {
     Spinner spEvaluacion;
     String[] nota;
     private boolean primera=true;
-    TextView valorEntradas;
+    EditText valorEntradas;
 
     private Button guardar;
-
-
-
-    public TextView getValorEntradas() {
-        return valorEntradas;
-    }
-
-    public void setValorEntradas(TextView valorEntradas) {
-        this.valorEntradas = valorEntradas;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,11 +49,7 @@ public class MainActivity extends AppCompatActivity {
         spEvaluacion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if(primera){
-                    primera=false;
-                }else{
-                    Toast.makeText(getApplicationContext(), items[i],Toast.LENGTH_LONG).show();
-                }
+                
             }
 
             @Override
@@ -71,9 +57,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
-
-
 
 
         spGenero=(Spinner) findViewById(R.id.spGenero);
@@ -100,8 +83,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         DecimalFormat formato=new DecimalFormat("###,###");
-        valorEntradas=(TextView) findViewById(R.id.valorEntrada);
-        valorEntradas.setText("$"+formato.format(valorEntradas));
+        valorEntradas=(EditText) findViewById(R.id.valorEntrada);
 
 
         tvFecha=(TextView) findViewById(R.id.etFecha);
