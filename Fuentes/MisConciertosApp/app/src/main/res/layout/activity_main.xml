@@ -95,7 +95,8 @@
             android:text="REGISTRAR"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/textoTitulo">
+            android:textSize="@dimen/textoTitulo"
+            android:onClick="Guardar">
 
         </Button>
 

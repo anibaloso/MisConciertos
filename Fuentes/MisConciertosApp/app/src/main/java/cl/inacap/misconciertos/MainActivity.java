@@ -1,5 +1,6 @@
 package cl.inacap.misconciertos;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
@@ -18,6 +19,9 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+import cl.inacap.misconciertos.dto.Concierto;
+import cl.inacap.misconciertos.dao.DaoConcierto;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -49,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         spEvaluacion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                
+
             }
 
             @Override
@@ -71,8 +75,8 @@ public class MainActivity extends AppCompatActivity {
                 if(primera){
                     primera=false;
                 }else{
-                    Toast.makeText(getApplicationContext(), items[i],Toast.LENGTH_LONG).show();
-                }
+                    Toast.makeText(getApplicationContext(), items[i],Toast.LENGTH_SHORT).show();
+                }   //lo coloque en short por que era muy larga el tiempo de muestra
             }
 
             @Override
@@ -113,4 +117,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public void Guardar(View view) {
+        Concierto concierto = new Concierto();
+
+
+    }
+
+    public void mostrarErrores (List<String> errores){
+        String mensaje = "";
+        for (String e: errores){
+            mensaje+= "-" + e + "\n";
+        }
+        AlertDialog.Builder alerBuilder = new AlertDialog.Builder(MainActivity.this);
+        alerBuilder.setTitle("Errores")
+                .setMessage(mensaje)
+                .setPositiveButton("Aceptar", null)
+                .create()
+                .show();
+    }
 }
