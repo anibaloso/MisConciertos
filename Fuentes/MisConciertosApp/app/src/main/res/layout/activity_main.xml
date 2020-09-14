@@ -21,7 +21,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="337dp"
+        android:layout_height="209dp"
         android:layout_marginLeft="@dimen/marginIzq"
         android:layout_marginTop="@dimen/marginTopTitle"
         android:layout_marginRight="@dimen/marginDer"
@@ -30,6 +30,7 @@
         android:textAlignment="center">
 
         <EditText
+            android:id="@+id/nombreArtista"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/icons"
@@ -44,7 +45,8 @@
             android:id="@+id/etFecha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/textoCuadros"
+            android:layout_marginTop="@dimen/marginTop"
+
             android:background="@color/icons"
             android:clickable="true"
             android:focusable="false"
@@ -55,50 +57,60 @@
             android:textSize="@dimen/textoCuadros"></TextView>
 
         <Spinner
+
             android:id="@+id/spGenero"
-            android:background="@color/icons"
             android:layout_width="match_parent"
             android:layout_height="@dimen/textoCuadros"
-            android:layout_marginTop="@dimen/textoCuadros"
+            android:layout_marginTop="@dimen/marginTop"
+            android:background="@color/icons"
             android:scrollbarSize="@dimen/textoCuadros">
 
         </Spinner>
 
         <EditText
             android:id="@+id/valorEntrada"
-            android:background="@color/icons"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/textoCuadros"
-            android:inputType="number"
+            android:layout_marginTop="@dimen/marginTop"
+            android:background="@color/icons"
             android:hint="@string/valor"
+            android:inputType="number"
             android:textSize="@dimen/textoCuadros">
 
         </EditText>
+
         <Spinner
             android:id="@+id/spEvaluacion"
-            android:background="@color/icons"
             android:layout_width="match_parent"
             android:layout_height="@dimen/textoCuadros"
-            android:layout_marginTop="@dimen/textoCuadros"
+            android:layout_marginTop="@dimen/marginTop"
+            android:background="@color/icons"
             android:scrollbarSize="@dimen/textoCuadros">
 
         </Spinner>
 
     </LinearLayout>
 
-        <Button
-            android:id="@+id/guardar"
-            android:layout_marginLeft="@dimen/marginIzq"
-            android:layout_marginRight="@dimen/marginDer"
-            android:layout_marginTop="@dimen/textoCuadros"
-            android:text="REGISTRAR"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/textoTitulo"
-            android:onClick="Guardar">
+    <Button
+        android:id="@+id/guardar"
+        android:layout_marginLeft="@dimen/marginIzqButt"
+        android:layout_marginRight="@dimen/marginDerButt"
+        android:layout_marginTop="@dimen/textoCuadros"
+        android:text="REGISTRAR"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/textoTitulo"
+        android:onClick="Guardar">
 
-        </Button>
+    </Button>
+
+    <ListView
+        android:id="@+id/conciertoLv"
+        android:layout_marginTop="@dimen/textoTitulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </ListView>
 
 
 

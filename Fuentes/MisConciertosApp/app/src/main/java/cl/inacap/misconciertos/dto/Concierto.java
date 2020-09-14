@@ -1,11 +1,7 @@
 package cl.inacap.misconciertos.dto;
 
-import androidx.appcompat.app.AlertDialog;
-
+import java.text.DecimalFormat;
 import java.util.Date;
-import java.util.List;
-
-import cl.inacap.misconciertos.MainActivity;
 
 public class Concierto {
 
@@ -14,6 +10,7 @@ public class Concierto {
     private String genero;
     private int precioEntrada;
     private int calificacion;
+    DecimalFormat formato=new DecimalFormat("###.###");
 
     public Concierto(){
 
@@ -50,13 +47,15 @@ public class Concierto {
     public void setGenero(String genero) {
         this.genero = genero;
     }
-
-    public int getPrecioEntrada() {
-        return precioEntrada;
+//le cambio el int por un string ni idea por que
+    public String getPrecioEntrada() {
+        return formato.format(precioEntrada);
     }
 
     public void setPrecioEntrada(int precioEntrada) {
-        this.precioEntrada = precioEntrada;
+
+        this.precioEntrada=precioEntrada;
+
     }
 
     public int getCalificacion() {
@@ -67,5 +66,8 @@ public class Concierto {
         this.calificacion = calificacion;
     }
 
-
+    @Override
+    public String toString() {
+        return fechaEvento+" "+nombreArtista+" "+precioEntrada+" ";
+    }
 }
