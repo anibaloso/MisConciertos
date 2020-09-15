@@ -30,6 +30,7 @@
         android:textAlignment="center">
 
         <EditText
+            android:textAllCaps="true"
             android:id="@+id/nombreArtista"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -104,12 +105,16 @@
 
     </Button>
 
+
     <ListView
+        android:background="@color/icons"
+        android:layout_marginBottom="@dimen/marginAba"
+        android:layout_marginRight="@dimen/marginDerLv"
+        android:layout_marginLeft="@dimen/marginIzqLv"
         android:id="@+id/conciertoLv"
-        android:layout_marginTop="@dimen/textoTitulo"
+        android:layout_marginTop="@dimen/textoCuadros"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
     </ListView>
 
 

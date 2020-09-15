@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.text.InputFilter;
+import android.util.AndroidException;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -33,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText valorEntrada;
     private ListView conciertoLv;
     private Button guardar;
-
+    private ArrayList<String> arrayList;
     TextView valorEm;
     TextView tvFecha;
     Calendar calendario;
@@ -45,9 +47,9 @@ public class MainActivity extends AppCompatActivity {
     Spinner spEvaluacion;
     String[] nota;
 
+
     private boolean primera=true;
-
-
+    private ArrayAdapter<String> adapter;
 
 
     @Override
@@ -55,83 +57,25 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        this.nombreArtista=findViewById(R.id.nombreArtista);
-        this.valorEntrada=findViewById(R.id.valorEntrada);
-        this.conciertoLv=findViewById(R.id.conciertoLv);
-        this.guardar=findViewById(R.id.guardar);
-        this.guardar.setOnClickListener(new View.OnClickListener() {
+        nombreArtista=(EditText)findViewById(R.id.nombreArtista);
+        valorEntrada=(EditText)findViewById(R.id.valorEntrada);
+        guardar=(Button)findViewById(R.id.guardar);
+        conciertoLv=(ListView)findViewById(R.id.conciertoLv);
+        arrayList=new ArrayList<String>();
+        adapter=new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item,arrayList);
+        conciertoLv.setAdapter(adapter);
+
+
+        guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                List<String> errores = new ArrayList<>();
-                String nombre=null;
-                int valor=0;
-                int calificacion=0;
-                calificacion=Integer.parseInt(spEvaluacion.toString());
-                Time fecha;
-                try {
-                    nombre=nombreArtista.getText().toString();
-                    valor=Integer.parseInt(valorEntrada.getText().toString());
-                    if (valor<1){
-                        throw new Exception();
-                    }
-                }catch(Exception e){
-                    errores.add("El valor de la entrada es en pesos chilenos y debe ser mayor que 0");
-                }
-                if (errores.isEmpty()){
-                    Concierto con=new Concierto();
-                    con.setPrecioEntrada(valor);
-                    con.setNombreArtista(nombre);
-                    con.setCalificacion(calificacion);
-                    conciertos.add(con);
-                }else{
-                    mostrarErrores(errores);
-                }
+                Toast.makeText(getApplicationContext(),"Guardado con exito",Toast.LENGTH_SHORT).show();
+                arrayList.add("Fecha :"+tvFecha.getText().toString()+" -- Concierto de : \n"+ nombreArtista.getText().toString());
+                arrayList.add("Valor de la entrada = "+valorEntrada.getText().toString());
+
+                adapter.notifyDataSetChanged();
             }
         });
-
-        spEvaluacion=(Spinner) findViewById(R.id.spEvaluacion);
-        nota=getResources().getStringArray(R.array.evaluacion);
-        ArrayAdapter<String> adapter2=new ArrayAdapter<String>(getBaseContext(),android.R.layout.simple_spinner_item,nota);
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spEvaluacion.setAdapter(adapter2);
-        spEvaluacion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-
-        spGenero=(Spinner) findViewById(R.id.spGenero);
-        items=getResources().getStringArray(R.array.generoMusical);
-        //ahora poblamos
-        ArrayAdapter<String> adapter= new ArrayAdapter<String>(getBaseContext(),android.R.layout.simple_spinner_item,items);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spGenero.setAdapter(adapter);
-        spGenero.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if(primera){
-                    primera=false;
-                }else{
-                    Toast.makeText(getApplicationContext(), items[i],Toast.LENGTH_SHORT).show();
-                }   //lo coloque en short por que era muy larga el tiempo de muestra
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-
-        //DecimalFormat formato=new DecimalFormat("###,###");
-        //valorEntradas=(EditText) findViewById(R.id.valorEntrada);
 
 
         tvFecha=(TextView) findViewById(R.id.etFecha);
@@ -158,6 +102,104 @@ public class MainActivity extends AppCompatActivity {
                 datePickerDialog.show();
             }
         });
+        /*
+        this.nombreArtista=findViewById(R.id.nombreArtista);
+        this.valorEntrada=findViewById(R.id.valorEntrada);
+        this.conciertoLv=findViewById(R.id.conciertoLv);
+        try {
+        this.guardar=findViewById(R.id.guardar);
+        this.guardar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                List<String> errores = new ArrayList<>();
+                String nombre=null;
+                int valor=0;
+                int calificacion=0;
+                calificacion=Integer.parseInt(spEvaluacion.toString());
+                Time fecha;
+                try {
+                    nombre=nombreArtista.getText().toString();
+                    valor=Integer.parseInt(valorEntrada.getText().toString());
+                    if (valor<1){
+                        throw new Exception();
+                    }
+                }catch(Exception e){
+                    errores.add("El valor de la entrada es en pesos chilenos y debe ser mayor que 0");
+                }
+                try {
+                    if (errores.isEmpty()){
+                        Concierto con=new Concierto();
+                        con.setPrecioEntrada(valor);
+                        con.setNombreArtista(nombre);
+                        con.setCalificacion(calificacion);
+                        conciertos.add(con);
+                    }else{
+                        mostrarErrores(errores);
+                    }
+                }catch(Exception e){
+
+                }
+
+            }
+        });
+        }catch (Exception ex){
+            Toast.makeText(getApplicationContext(),"problemas boton",Toast.LENGTH_SHORT);
+        }
+        */
+       /* try {*/
+            spEvaluacion = (Spinner) findViewById(R.id.spEvaluacion);
+            nota = getResources().getStringArray(R.array.evaluacion);
+            ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getBaseContext(), android.R.layout.simple_spinner_item, nota);
+            adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spEvaluacion.setAdapter(adapter2);
+            spEvaluacion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+                }
+            });
+       /* }catch(Exception e){
+            Toast.makeText(getApplicationContext(),"problema con el spiner evaluacion",Toast.LENGTH_SHORT);
+        }
+
+        try {   */
+
+
+        spGenero=(Spinner) findViewById(R.id.spGenero);
+        items=getResources().getStringArray(R.array.generoMusical);
+        //ahora poblamos
+        ArrayAdapter<String> adapter= new ArrayAdapter<String>(getBaseContext(),android.R.layout.simple_spinner_item,items);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spGenero.setAdapter(adapter);
+        spGenero.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(primera){
+                    primera=false;
+                }else{
+                    Toast.makeText(getApplicationContext(), items[i],Toast.LENGTH_SHORT).show();
+                }   //lo coloque en short por que era muy larga el tiempo de muestra
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+/*
+        }catch(Exception e){
+            Toast.makeText(getApplicationContext(),"problema con el spiner genero",Toast.LENGTH_SHORT);
+        }
+            /*
+        //DecimalFormat formato=new DecimalFormat("###,###");
+        //valorEntradas=(EditText) findViewById(R.id.valorEntrada);
+
+*/
+
     }
 
 
@@ -172,11 +214,12 @@ public class MainActivity extends AppCompatActivity {
         for (String e: errores){
             mensaje+= "-" + e + "\n";
         }
-        AlertDialog.Builder alerBuilder = new AlertDialog.Builder(MainActivity.this);
-        alerBuilder.setTitle("Errores")
+        AlertDialog.Builder alertBuilder= new AlertDialog.Builder(MainActivity.this);
+        alertBuilder.setTitle("Error de validacion")
                 .setMessage(mensaje)
-                .setPositiveButton("Aceptar", null)
+                .setPositiveButton("Aceptar",null)
                 .create()
                 .show();
+
     }
 }
