@@ -7,6 +7,8 @@
     android:orientation="vertical"
     android:background="@color/accent"
     tools:context=".MainActivity">
+
+
     <TextView
         android:text="Mis Conciertos"
         android:background="@color/primary"
@@ -21,13 +23,22 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="209dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/marginIzq"
         android:layout_marginTop="@dimen/marginTopTitle"
         android:layout_marginRight="@dimen/marginDer"
         android:background="@color/primary_light"
         android:orientation="vertical"
         android:textAlignment="center">
+
+        <TextView
+            android:text="Nombre Artista:"
+            android:textAlignment="textStart"
+            android:textColor="@color/primary_text"
+            android:textSize="15sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </TextView>
 
         <EditText
             android:textAllCaps="true"
@@ -41,6 +52,15 @@
             android:textSize="@dimen/textoCuadros">
 
         </EditText>
+
+        <TextView
+            android:text="Fecha Evento:"
+            android:textAlignment="textStart"
+            android:textColor="@color/primary_text"
+            android:textSize="15sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </TextView>
 
         <TextView
             android:id="@+id/etFecha"
@@ -57,6 +77,15 @@
             android:textColor="@color/primary_text"
             android:textSize="@dimen/textoCuadros"></TextView>
 
+        <TextView
+            android:text="Genero:"
+            android:textAlignment="textStart"
+            android:textColor="@color/primary_text"
+            android:textSize="15sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </TextView>
+
         <Spinner
 
             android:id="@+id/spGenero"
@@ -67,6 +96,15 @@
             android:scrollbarSize="@dimen/textoCuadros">
 
         </Spinner>
+
+        <TextView
+            android:text="Valor Entrada:"
+            android:textAlignment="textStart"
+            android:textColor="@color/primary_text"
+            android:textSize="15sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </TextView>
 
         <EditText
             android:id="@+id/valorEntrada"
@@ -79,6 +117,15 @@
             android:textSize="@dimen/textoCuadros">
 
         </EditText>
+
+        <TextView
+            android:text="Evaluacion:"
+            android:textAlignment="textStart"
+            android:textColor="@color/primary_text"
+            android:textSize="15sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </TextView>
 
         <Spinner
             android:id="@+id/spEvaluacion"
@@ -100,8 +147,7 @@
         android:text="REGISTRAR"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/textoTitulo"
-        android:onClick="Guardar">
+        android:textSize="25dp">
 
     </Button>
 
@@ -116,7 +162,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </ListView>
-
-
 
 </LinearLayout>

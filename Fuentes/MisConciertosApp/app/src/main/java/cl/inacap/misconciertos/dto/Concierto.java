@@ -47,9 +47,9 @@ public class Concierto {
     public void setGenero(String genero) {
         this.genero = genero;
     }
-//le cambio el int por un string ni idea por que
-    public String getPrecioEntrada() {
-        return formato.format(precioEntrada);
+
+    public int getPrecioEntrada() {
+        return precioEntrada;
     }
 
     public void setPrecioEntrada(int precioEntrada) {

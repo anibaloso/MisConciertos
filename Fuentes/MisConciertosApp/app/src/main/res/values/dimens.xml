@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="textoTitulo">40sp</dimen>
-    <dimen name="textoCuadros">30sp</dimen>
+    <dimen name="textoTitulo">40dp</dimen>
+    <dimen name="textoCuadros">20dp</dimen>
     <dimen name="marginTop">5dp</dimen>
     <dimen name="marginIzq">40dp</dimen>
     <dimen name="marginDer">40dp</dimen>

@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import java.sql.Time;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -69,9 +70,52 @@ public class MainActivity extends AppCompatActivity {
         guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(),"Guardado con exito",Toast.LENGTH_SHORT).show();
+                Concierto concierto = new Concierto();
+                List<String> errores = new ArrayList<>();
+                SimpleDateFormat fecha = new SimpleDateFormat("dd/MM/yyyy");
+
+                if(!nombreArtista.getText().toString().isEmpty()){
+                    concierto.setNombreArtista(nombreArtista.getText().toString());
+                }else{
+                    errores.add("Ingrese un Nombre de Artista o Grupo Musical");
+                }
+                try {
+                    concierto.setFechaEvento(DaoConcierto.ParseFecha(tvFecha.getText().toString()));
+                }catch(Exception e){
+                    errores.add("Error al ingresar la Fecha");
+                }
+                if(!spGenero.getSelectedItem().toString().equals("Selecciona un Genero")){
+                    concierto.setGenero(spGenero.getSelectedItem().toString());
+                }else{
+                    errores.add("Seleccione un Genero Musical");
+                }
+                if(!valorEntrada.getText().toString().isEmpty()){
+                    concierto.setPrecioEntrada(Integer.parseInt(valorEntrada.getText().toString()));
+                }else{
+                    errores.add("Ingrese el valor de la entrada");
+                }
+                if(!spEvaluacion.getSelectedItem().toString().equals("Selecciona una Evaluación")){
+                    concierto.setCalificacion(Integer.parseInt(spEvaluacion.getSelectedItem().toString()));
+                }else{
+                    errores.add("Seleccione una Calificacion");
+                }
+
+                if(errores.isEmpty()){
+                    arrayList.add("Concierto de: " + concierto.getNombreArtista());
+                    arrayList.add("Fecha: " + fecha.format(concierto.getFechaEvento()));
+                    arrayList.add("Genero: " + concierto.getGenero());
+                    arrayList.add("Valor de Entrada: $" + concierto.getPrecioEntrada());
+                    arrayList.add("Calificacion: " + concierto.getCalificacion());
+                    arrayList.add("------------------------------------------------");
+                    Toast.makeText(getApplicationContext(),"Guardado con exito",Toast.LENGTH_SHORT).show();
+
+                }else{
+                    mostrarErrores(errores);
+                }
+
+                /*Toast.makeText(getApplicationContext(),"Guardado con exito",Toast.LENGTH_SHORT).show();
                 arrayList.add("Fecha :"+tvFecha.getText().toString()+" -- Concierto de : \n"+ nombreArtista.getText().toString());
-                arrayList.add("Valor de la entrada = "+valorEntrada.getText().toString());
+                arrayList.add("Valor de la entrada = "+valorEntrada.getText().toString());*/
 
                 adapter.notifyDataSetChanged();
             }
@@ -87,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
 
         month=month+1;
 
-        tvFecha.setText(day+" / "+month+" / "+year);
+        tvFecha.setText(day+"/"+month+"/"+year);
 
         tvFecha.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onDateSet(DatePicker view, int anio, int mes, int dia) {
                         mes=mes+1;
-                        tvFecha.setText(dia+" / "+mes+" / "+anio);
+                        tvFecha.setText(dia+"/"+mes+"/"+anio);
                     }
                 },year,month,day);
                 datePickerDialog.show();
@@ -203,11 +247,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void Guardar(View view) {
-        Concierto concierto = new Concierto();
-
-
-    }
 
     public void mostrarErrores (List<String> errores){
         String mensaje = "";
@@ -222,4 +261,5 @@ public class MainActivity extends AppCompatActivity {
                 .show();
 
     }
+
 }

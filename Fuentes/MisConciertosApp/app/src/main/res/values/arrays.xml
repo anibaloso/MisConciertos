@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="generoMusical">
-        <item>Genero Musical</item>
+        <item>Selecciona un Genero</item>
         <item>Rock</item>
         <item>Jazz</item>
         <item>Pop</item>
         <item>Reguetoon</item>
         <item>Salsa</item>
         <item>Metal</item>
+        <item>Otro</item>
 
     </string-array>
 
     <string-array name="evaluacion">
+        <item>Selecciona una Evaluación</item>
         <item>7</item>
         <item>6</item>
         <item>5</item>
