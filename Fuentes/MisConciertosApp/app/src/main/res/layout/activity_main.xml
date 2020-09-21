@@ -8,7 +8,6 @@
     android:background="@color/accent"
     tools:context=".MainActivity">
 
-
     <TextView
         android:text="Mis Conciertos"
         android:background="@color/primary"
@@ -21,11 +20,20 @@
         android:layout_height="wrap_content">
     </TextView>
 
+    <ScrollView
+        android:id="@+id/layout"
+        android:layout_height="match_parent"
+        android:scrollbars="horizontal|vertical"
+        android:layout_width="match_parent"
+        android:layout_marginTop="5dip"
+        android:scrollbarStyle="outsideInset"
+        android:fillViewport="true">
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginLeft="@dimen/marginIzq"
-        android:layout_marginTop="@dimen/marginTopTitle"
+        android:layout_marginTop="@dimen/textoCuadros"
         android:layout_marginRight="@dimen/marginDer"
         android:background="@color/primary_light"
         android:orientation="vertical"
@@ -137,8 +145,6 @@
 
         </Spinner>
 
-    </LinearLayout>
-
     <Button
         android:id="@+id/guardar"
         android:layout_marginLeft="@dimen/marginIzqButt"
@@ -147,20 +153,22 @@
         android:text="REGISTRAR"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="25dp">
+        android:textSize="25sp">
 
     </Button>
 
+        <ListView
+            android:id="@+id/conciertoLv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/textoCuadros"
+            android:layout_marginBottom="@dimen/marginAba"
+            android:background="@color/icons">
 
-    <ListView
-        android:background="@color/icons"
-        android:layout_marginBottom="@dimen/marginAba"
-        android:layout_marginRight="@dimen/marginDerLv"
-        android:layout_marginLeft="@dimen/marginIzqLv"
-        android:id="@+id/conciertoLv"
-        android:layout_marginTop="@dimen/textoCuadros"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </ListView>
+        </ListView>
+
+    </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>

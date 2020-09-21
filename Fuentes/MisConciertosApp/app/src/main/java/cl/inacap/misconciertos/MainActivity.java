@@ -5,8 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
-import android.text.InputFilter;
-import android.util.AndroidException;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,37 +16,29 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.sql.Time;
-import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import cl.inacap.misconciertos.dto.Concierto;
-import cl.inacap.misconciertos.dao.DaoConcierto;
+import cl.inacap.misconciertos.dao.ListAdapter;
+import cl.inacap.misconciertos.dto.Eventos;
+import cl.inacap.misconciertos.dao.EventosDAO;
 
 public class MainActivity extends AppCompatActivity {
 
-    private List<Concierto> conciertos=new ArrayList<>();
-
     private EditText nombreArtista;
     private EditText valorEntrada;
-    private ListView conciertoLv;
     private Button guardar;
-    private ArrayList<String> arrayList;
-    TextView valorEm;
+    private List<Eventos> arrayEventos = new ArrayList<>();
+    private ListView mListView;
+    ListAdapter mAdapter;
     TextView tvFecha;
     Calendar calendario;
     int day,month,year;
-
     Spinner spGenero;
     String[] items;
-
     Spinner spEvaluacion;
     String[] nota;
-
-
     private boolean primera=true;
     private ArrayAdapter<String> adapter;
 
@@ -61,63 +51,67 @@ public class MainActivity extends AppCompatActivity {
         nombreArtista=(EditText)findViewById(R.id.nombreArtista);
         valorEntrada=(EditText)findViewById(R.id.valorEntrada);
         guardar=(Button)findViewById(R.id.guardar);
-        conciertoLv=(ListView)findViewById(R.id.conciertoLv);
-        arrayList=new ArrayList<String>();
-        adapter=new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item,arrayList);
-        conciertoLv.setAdapter(adapter);
 
+        mListView = findViewById(R.id.conciertoLv);
 
         guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Concierto concierto = new Concierto();
+                Eventos evento = new Eventos();
                 List<String> errores = new ArrayList<>();
-                SimpleDateFormat fecha = new SimpleDateFormat("dd/MM/yyyy");
+                mAdapter = new ListAdapter(MainActivity.this, R.layout.item_row, arrayEventos);
+
 
                 if(!nombreArtista.getText().toString().isEmpty()){
-                    concierto.setNombreArtista(nombreArtista.getText().toString());
+                    evento.setNombreArtista(nombreArtista.getText().toString());
                 }else{
                     errores.add("Ingrese un Nombre de Artista o Grupo Musical");
                 }
                 try {
-                    concierto.setFechaEvento(DaoConcierto.ParseFecha(tvFecha.getText().toString()));
+                    evento.setFechaEvento(EventosDAO.StringAfecha(tvFecha.getText().toString()));
                 }catch(Exception e){
                     errores.add("Error al ingresar la Fecha");
                 }
                 if(!spGenero.getSelectedItem().toString().equals("Selecciona un Genero")){
-                    concierto.setGenero(spGenero.getSelectedItem().toString());
+                    evento.setGenero(spGenero.getSelectedItem().toString());
                 }else{
                     errores.add("Seleccione un Genero Musical");
                 }
-                if(!valorEntrada.getText().toString().isEmpty()){
-                    concierto.setPrecioEntrada(Integer.parseInt(valorEntrada.getText().toString()));
-                }else{
+                if(valorEntrada.getText().toString().isEmpty()){
                     errores.add("Ingrese el valor de la entrada");
+                }else{
+                    if((Integer.parseInt(valorEntrada.getText().toString()) >= 0)){
+                        evento.setPrecioEntrada(Integer.parseInt(valorEntrada.getText().toString()));
+                    }else{
+                        errores.add("El valor de la entrada debe ser igual o mayor a cero");
+                    }
                 }
                 if(!spEvaluacion.getSelectedItem().toString().equals("Selecciona una Evaluación")){
-                    concierto.setCalificacion(Integer.parseInt(spEvaluacion.getSelectedItem().toString()));
+                    evento.setCalificacion(Integer.parseInt(spEvaluacion.getSelectedItem().toString()));
+                    if(evento.getCalificacion() >= 1 && evento.getCalificacion() <= 3){
+                        evento.setImagen(R.mipmap.malo);
+                    }
+                    if(evento.getCalificacion() == 4 || evento.getCalificacion() == 5){
+                        evento.setImagen(R.mipmap.neutro);
+                    }
+                    if(evento.getCalificacion() == 6 || evento.getCalificacion() == 7){
+                        evento.setImagen(R.mipmap.bueno);
+                    }
+
                 }else{
                     errores.add("Seleccione una Calificacion");
                 }
 
                 if(errores.isEmpty()){
-                    arrayList.add("Concierto de: " + concierto.getNombreArtista());
-                    arrayList.add("Fecha: " + fecha.format(concierto.getFechaEvento()));
-                    arrayList.add("Genero: " + concierto.getGenero());
-                    arrayList.add("Valor de Entrada: $" + concierto.getPrecioEntrada());
-                    arrayList.add("Calificacion: " + concierto.getCalificacion());
-                    arrayList.add("------------------------------------------------");
+                    arrayEventos.add(evento);
+                    mListView.setAdapter(mAdapter);
+
                     Toast.makeText(getApplicationContext(),"Guardado con exito",Toast.LENGTH_SHORT).show();
 
                 }else{
                     mostrarErrores(errores);
                 }
-
-                /*Toast.makeText(getApplicationContext(),"Guardado con exito",Toast.LENGTH_SHORT).show();
-                arrayList.add("Fecha :"+tvFecha.getText().toString()+" -- Concierto de : \n"+ nombreArtista.getText().toString());
-                arrayList.add("Valor de la entrada = "+valorEntrada.getText().toString());*/
-
-                adapter.notifyDataSetChanged();
+                mAdapter.notifyDataSetChanged();
             }
         });
 
@@ -146,51 +140,7 @@ public class MainActivity extends AppCompatActivity {
                 datePickerDialog.show();
             }
         });
-        /*
-        this.nombreArtista=findViewById(R.id.nombreArtista);
-        this.valorEntrada=findViewById(R.id.valorEntrada);
-        this.conciertoLv=findViewById(R.id.conciertoLv);
-        try {
-        this.guardar=findViewById(R.id.guardar);
-        this.guardar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                List<String> errores = new ArrayList<>();
-                String nombre=null;
-                int valor=0;
-                int calificacion=0;
-                calificacion=Integer.parseInt(spEvaluacion.toString());
-                Time fecha;
-                try {
-                    nombre=nombreArtista.getText().toString();
-                    valor=Integer.parseInt(valorEntrada.getText().toString());
-                    if (valor<1){
-                        throw new Exception();
-                    }
-                }catch(Exception e){
-                    errores.add("El valor de la entrada es en pesos chilenos y debe ser mayor que 0");
-                }
-                try {
-                    if (errores.isEmpty()){
-                        Concierto con=new Concierto();
-                        con.setPrecioEntrada(valor);
-                        con.setNombreArtista(nombre);
-                        con.setCalificacion(calificacion);
-                        conciertos.add(con);
-                    }else{
-                        mostrarErrores(errores);
-                    }
-                }catch(Exception e){
 
-                }
-
-            }
-        });
-        }catch (Exception ex){
-            Toast.makeText(getApplicationContext(),"problemas boton",Toast.LENGTH_SHORT);
-        }
-        */
-       /* try {*/
             spEvaluacion = (Spinner) findViewById(R.id.spEvaluacion);
             nota = getResources().getStringArray(R.array.evaluacion);
             ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getBaseContext(), android.R.layout.simple_spinner_item, nota);
@@ -206,12 +156,6 @@ public class MainActivity extends AppCompatActivity {
                 public void onNothingSelected(AdapterView<?> adapterView) {
                 }
             });
-       /* }catch(Exception e){
-            Toast.makeText(getApplicationContext(),"problema con el spiner evaluacion",Toast.LENGTH_SHORT);
-        }
-
-        try {   */
-
 
         spGenero=(Spinner) findViewById(R.id.spGenero);
         items=getResources().getStringArray(R.array.generoMusical);
@@ -234,19 +178,8 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-/*
-        }catch(Exception e){
-            Toast.makeText(getApplicationContext(),"problema con el spiner genero",Toast.LENGTH_SHORT);
-        }
-            /*
-        //DecimalFormat formato=new DecimalFormat("###,###");
-        //valorEntradas=(EditText) findViewById(R.id.valorEntrada);
-
-*/
 
     }
-
-
 
     public void mostrarErrores (List<String> errores){
         String mensaje = "";

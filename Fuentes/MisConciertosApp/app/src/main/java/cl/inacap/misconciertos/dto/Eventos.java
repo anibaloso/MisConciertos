@@ -3,25 +3,27 @@ package cl.inacap.misconciertos.dto;
 import java.text.DecimalFormat;
 import java.util.Date;
 
-public class Concierto {
+public class Eventos {
 
     private String nombreArtista;
     private Date fechaEvento;
     private String genero;
     private int precioEntrada;
     private int calificacion;
-    DecimalFormat formato=new DecimalFormat("###.###");
+    private int imagen;
 
-    public Concierto(){
+
+    public Eventos(){
 
     }
 
-    public Concierto(String nombreArtista, Date fechaEvento, String genero, int precioEntrada, int calificacion) {
+    public Eventos(String nombreArtista, Date fechaEvento, String genero, int precioEntrada, int calificacion, int imagen) {
         this.nombreArtista = nombreArtista;
         this.fechaEvento = fechaEvento;
         this.genero = genero;
         this.precioEntrada = precioEntrada;
         this.calificacion = calificacion;
+        this.imagen = imagen;
     }
 
     public String getNombreArtista() {
@@ -53,9 +55,7 @@ public class Concierto {
     }
 
     public void setPrecioEntrada(int precioEntrada) {
-
         this.precioEntrada=precioEntrada;
-
     }
 
     public int getCalificacion() {
@@ -64,6 +64,14 @@ public class Concierto {
 
     public void setCalificacion(int calificacion) {
         this.calificacion = calificacion;
+    }
+
+    public int getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(int imagen) {
+        this.imagen = imagen;
     }
 
     @Override

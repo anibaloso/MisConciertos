@@ -3,13 +3,13 @@
     <dimen name="textoTitulo">40dp</dimen>
     <dimen name="textoCuadros">20dp</dimen>
     <dimen name="marginTop">5dp</dimen>
-    <dimen name="marginIzq">40dp</dimen>
-    <dimen name="marginDer">40dp</dimen>
+    <dimen name="marginIzq">30dp</dimen>
+    <dimen name="marginDer">30dp</dimen>
     <dimen name="marginIzqButt">80dp</dimen>
     <dimen name="marginDerButt">80dp</dimen>
-
     <dimen name="marginTopTitle">40dp</dimen>
     <dimen name="marginAba">30dp</dimen>
     <dimen name="marginDerLv">30dp</dimen>
     <dimen name="marginIzqLv">30dp</dimen>
+    <dimen name="IzqItemLow">10dp</dimen>
 </resources>
