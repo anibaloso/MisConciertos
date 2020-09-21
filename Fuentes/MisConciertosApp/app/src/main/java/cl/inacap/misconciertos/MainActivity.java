@@ -16,15 +16,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 
-import cl.inacap.misconciertos.dao.ListAdapter;
-import cl.inacap.misconciertos.dto.Eventos;
 import cl.inacap.misconciertos.dao.EventosDAO;
+import cl.inacap.misconciertos.dto.Eventos;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private Button guardar;
     private List<Eventos> arrayEventos = new ArrayList<>();
     private ListView mListView;
-    ListAdapter mAdapter;
+    EventosDAO mAdapter;
     TextView tvFecha;
     Calendar calendario;
     int day,month,year;
@@ -61,9 +58,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Eventos evento = new Eventos();
                 List<String> errores = new ArrayList<>();
-                mAdapter = new ListAdapter(MainActivity.this, R.layout.item_row, arrayEventos);
+                mAdapter = new EventosDAO(MainActivity.this, R.layout.item_row, arrayEventos);
 
-
+                //TODO validaciones de cada ingreso
                 if(!nombreArtista.getText().toString().isEmpty()){
                     evento.setNombreArtista(nombreArtista.getText().toString());
                 }else{
@@ -104,15 +101,14 @@ public class MainActivity extends AppCompatActivity {
                     if(evento.getCalificacion() == 6 || evento.getCalificacion() == 7){
                         evento.setImagen(R.mipmap.bueno);
                     }
-
                 }else{
                     errores.add("Seleccione una Calificacion");
                 }
 
+                //TODO si no hay errores al ingresar se agregara un concierto al array y se mostrara en el list view
                 if(errores.isEmpty()){
                     arrayEventos.add(evento);
                     mListView.setAdapter(mAdapter);
-
                     Toast.makeText(getApplicationContext(),"Guardado con exito",Toast.LENGTH_SHORT).show();
 
                 }else{

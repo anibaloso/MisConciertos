@@ -1,6 +1,5 @@
 package cl.inacap.misconciertos.dto;
 
-import java.text.DecimalFormat;
 import java.util.Date;
 
 public class Eventos {
