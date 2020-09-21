@@ -16,9 +16,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import cl.inacap.misconciertos.dao.ListAdapter;
 import cl.inacap.misconciertos.dto.Eventos;
@@ -80,8 +82,13 @@ public class MainActivity extends AppCompatActivity {
                 if(valorEntrada.getText().toString().isEmpty()){
                     errores.add("Ingrese el valor de la entrada");
                 }else{
+                    //TODO borrar despues 11.35
                     if((Integer.parseInt(valorEntrada.getText().toString()) >= 0)){
-                        evento.setPrecioEntrada(Integer.parseInt(valorEntrada.getText().toString()));
+                        if((Integer.parseInt(valorEntrada.getText().toString()) < 2147483646)){
+                            evento.setPrecioEntrada(Integer.parseInt(valorEntrada.getText().toString()));
+                        }else{
+                            errores.add("Dudo haya una entrada taaaaaan cara, ni que fueras a comerte a Salma Hayek\n No sea longi");
+                        }
                     }else{
                         errores.add("El valor de la entrada debe ser igual o mayor a cero");
                     }
@@ -112,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
                     mostrarErrores(errores);
                 }
                 mAdapter.notifyDataSetChanged();
+
             }
         });
 

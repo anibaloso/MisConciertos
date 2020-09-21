@@ -1,174 +1,171 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/accent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <TextView
-        android:text="Mis Conciertos"
-        android:background="@color/primary"
-        android:layout_marginLeft="@dimen/marginIzq"
-        android:layout_marginRight="@dimen/marginDer"
-        android:textAlignment="center"
-        android:textColor="@color/primary_text"
-        android:textSize="@dimen/textoTitulo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </TextView>
-
-    <ScrollView
-        android:id="@+id/layout"
-        android:layout_height="match_parent"
-        android:scrollbars="horizontal|vertical"
-        android:layout_width="match_parent"
-        android:layout_marginTop="5dip"
-        android:scrollbarStyle="outsideInset"
-        android:fillViewport="true">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="@dimen/marginIzq"
-        android:layout_marginTop="@dimen/textoCuadros"
-        android:layout_marginRight="@dimen/marginDer"
-        android:background="@color/primary_light"
-        android:orientation="vertical"
-        android:textAlignment="center">
-
-        <TextView
-            android:text="Nombre Artista:"
-            android:textAlignment="textStart"
-            android:textColor="@color/primary_text"
-            android:textSize="15sp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </TextView>
-
-        <EditText
-            android:textAllCaps="true"
-            android:id="@+id/nombreArtista"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/icons"
-            android:hint="@string/artista"
-            android:inputType="text"
-            android:textColor="@color/primary_text"
-            android:textSize="@dimen/textoCuadros">
-
-        </EditText>
-
-        <TextView
-            android:text="Fecha Evento:"
-            android:textAlignment="textStart"
-            android:textColor="@color/primary_text"
-            android:textSize="15sp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </TextView>
-
-        <TextView
-            android:id="@+id/etFecha"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/marginTop"
-
-            android:background="@color/icons"
-            android:clickable="true"
-            android:focusable="false"
-            android:hint="@string/fechaEjemplo"
-            android:inputType="date"
-            android:maxLines="1"
-            android:textColor="@color/primary_text"
-            android:textSize="@dimen/textoCuadros"></TextView>
-
-        <TextView
-            android:text="Genero:"
-            android:textAlignment="textStart"
-            android:textColor="@color/primary_text"
-            android:textSize="15sp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </TextView>
-
-        <Spinner
-
-            android:id="@+id/spGenero"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/textoCuadros"
-            android:layout_marginTop="@dimen/marginTop"
-            android:background="@color/icons"
-            android:scrollbarSize="@dimen/textoCuadros">
-
-        </Spinner>
-
-        <TextView
-            android:text="Valor Entrada:"
-            android:textAlignment="textStart"
-            android:textColor="@color/primary_text"
-            android:textSize="15sp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </TextView>
-
-        <EditText
-            android:id="@+id/valorEntrada"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/marginTop"
-            android:background="@color/icons"
-            android:hint="@string/valor"
-            android:inputType="number"
-            android:textSize="@dimen/textoCuadros">
-
-        </EditText>
-
-        <TextView
-            android:text="Evaluacion:"
-            android:textAlignment="textStart"
-            android:textColor="@color/primary_text"
-            android:textSize="15sp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </TextView>
-
-        <Spinner
-            android:id="@+id/spEvaluacion"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/textoCuadros"
-            android:layout_marginTop="@dimen/marginTop"
-            android:background="@color/icons"
-            android:scrollbarSize="@dimen/textoCuadros">
-
-        </Spinner>
-
-    <Button
-        android:id="@+id/guardar"
-        android:layout_marginLeft="@dimen/marginIzqButt"
-        android:layout_marginRight="@dimen/marginDerButt"
-        android:layout_marginTop="@dimen/textoCuadros"
-        android:text="REGISTRAR"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="25sp">
+        android:layout_marginLeft="@dimen/marginIzq"
+        android:layout_marginRight="@dimen/marginDer"
+        android:background="@color/primary"
+        android:text="Mis Conciertos"
+        android:textAlignment="center"
+        android:textColor="@color/primary_text"
+        android:textSize="@dimen/textoTitulo"></TextView>
 
-    </Button>
 
-        <ListView
-            android:id="@+id/conciertoLv"
+
+        <ScrollView
+            android:id="@+id/layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/textoCuadros"
-            android:layout_marginBottom="@dimen/marginAba"
-            android:background="@color/icons">
+            android:layout_marginTop="5dip"
+            android:fillViewport="true"
+            android:scrollbarStyle="outsideInset"
+            android:scrollbars="horizontal|vertical">
 
-        </ListView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/marginIzq"
+                android:layout_marginTop="@dimen/textoCuadros"
+                android:layout_marginRight="@dimen/marginDer"
+                android:background="@color/primary_light"
+                android:orientation="vertical"
+                android:textAlignment="center">
 
-    </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Nombre Artista:"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/primary_text"
+                    android:textSize="15sp"></TextView>
 
-    </ScrollView>
+                <EditText
+                    android:id="@+id/nombreArtista"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/icons"
+                    android:hint="@string/artista"
+                    android:inputType="text"
+                    android:textAllCaps="true"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/textoCuadros">
 
+                </EditText>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Fecha Evento:"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/primary_text"
+                    android:textSize="15sp"></TextView>
+
+                <TextView
+                    android:id="@+id/etFecha"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/marginTop"
+
+                    android:background="@color/icons"
+                    android:clickable="true"
+                    android:focusable="false"
+                    android:hint="@string/fechaEjemplo"
+                    android:inputType="date"
+                    android:maxLines="1"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/textoCuadros"></TextView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Genero:"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/primary_text"
+                    android:textSize="15sp"></TextView>
+
+                <Spinner
+
+                    android:id="@+id/spGenero"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/textoCuadros"
+                    android:layout_marginTop="@dimen/marginTop"
+                    android:background="@color/icons"
+                    android:scrollbarSize="@dimen/textoCuadros">
+
+                </Spinner>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Valor Entrada:"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/primary_text"
+                    android:textSize="15sp"></TextView>
+
+                <EditText
+                    android:id="@+id/valorEntrada"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/marginTop"
+                    android:background="@color/icons"
+                    android:hint="@string/valor"
+                    android:inputType="number"
+                    android:textSize="@dimen/textoCuadros">
+
+                </EditText>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Evaluacion:"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/primary_text"
+                    android:textSize="15sp"></TextView>
+
+                <Spinner
+                    android:id="@+id/spEvaluacion"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/textoCuadros"
+                    android:layout_marginTop="@dimen/marginTop"
+                    android:background="@color/icons"
+                    android:scrollbarSize="@dimen/textoCuadros">
+
+                </Spinner>
+
+                <Button
+                    android:id="@+id/guardar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/marginIzqButt"
+                    android:layout_marginTop="@dimen/textoCuadros"
+                    android:layout_marginRight="@dimen/marginDerButt"
+                    android:text="REGISTRAR"
+                    android:textSize="25sp">
+
+                </Button>
+
+                <ListView
+                    android:id="@+id/conciertoLv"
+                    android:layout_width="match_parent"
+                    android:layout_height="431dp"
+                    android:layout_marginTop="@dimen/textoCuadros"
+                    android:layout_marginBottom="@dimen/marginAba"
+                    android:background="@color/icons"
+                    android:nestedScrollingEnabled="true">
+
+                </ListView>
+
+            </LinearLayout>
+
+        </ScrollView>
 </LinearLayout>

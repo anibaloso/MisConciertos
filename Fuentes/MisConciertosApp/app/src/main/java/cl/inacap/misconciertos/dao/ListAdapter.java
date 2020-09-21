@@ -35,10 +35,10 @@ public class ListAdapter extends ArrayAdapter <Eventos> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View view = convertView;
-
         if(view == null) {
             view = LayoutInflater.from(mContext).inflate(resourceLayout, null);
         }
+        DecimalFormat formatear = new DecimalFormat("###,###.##");
 
         Eventos eventos = lista.get(position);
 
@@ -55,7 +55,8 @@ public class ListAdapter extends ArrayAdapter <Eventos> {
         txtGenero.setText("Genero: " + eventos.getGenero());
 
         TextView txtValor = view.findViewById(R.id.txtPrecio);
-        txtValor.setText("Precio: $" + String.valueOf(eventos.getPrecioEntrada()));
+        txtValor.setText("Precio: $" + formatear.format(eventos.getPrecioEntrada()));
+
 
         return view;
 
