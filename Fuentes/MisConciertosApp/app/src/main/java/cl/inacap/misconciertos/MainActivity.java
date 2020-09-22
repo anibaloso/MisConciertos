@@ -80,16 +80,20 @@ public class MainActivity extends AppCompatActivity {
                     errores.add("Ingrese el valor de la entrada");
                 }else{
                     //TODO borrar despues 11.35
-                    if((Integer.parseInt(valorEntrada.getText().toString()) >= 0)){
-                        if((Integer.parseInt(valorEntrada.getText().toString()) < 2147483646)){
-                            evento.setPrecioEntrada(Integer.parseInt(valorEntrada.getText().toString()));
-                        }else{
-                            errores.add("Dudo haya una entrada taaaaaan cara, ni que fueras a comerte a Salma Hayek\n No sea longi");
+
+                    try{
+                        if(Integer.parseInt(valorEntrada.getText().toString()) <= 2147483647){
+                            if((Integer.parseInt(valorEntrada.getText().toString()) >= 0)){
+                                evento.setPrecioEntrada(Integer.parseInt(valorEntrada.getText().toString()));
+                            }else{
+                                errores.add("El valor de la entrada debe ser igual o mayor a cero");
+                            }
                         }
-                    }else{
-                        errores.add("El valor de la entrada debe ser igual o mayor a cero");
-                    }
-                }
+                    }catch(Exception e){
+                        errores.add("Dudo haya una entrada taaaaaan cara, ni que fueras a comerte a Salma Hayek\n No sea longi");
+
+
+                }}
                 if(!spEvaluacion.getSelectedItem().toString().equals("Selecciona una Evaluación")){
                     evento.setCalificacion(Integer.parseInt(spEvaluacion.getSelectedItem().toString()));
                     if(evento.getCalificacion() >= 1 && evento.getCalificacion() <= 3){

@@ -6,23 +6,24 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="horizontal"
         android:background="@color/icons">
 
         <TextView
-            android:layout_width="160dp"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:textColor="@color/primary_text"
             android:id="@+id/txtNombre"></TextView>
 
         <TextView
-            android:layout_width="160dp"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:textColor="@color/primary_text"
             android:id="@+id/txtFecha"
             android:layout_below="@+id/txtNombre"></TextView>
 
         <TextView
-            android:layout_width="160dp"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/IzqItemLow"
             android:textColor="@color/primary_text"
@@ -30,7 +31,7 @@
             android:layout_toRightOf="@+id/txtNombre"></TextView>
 
         <TextView
-            android:layout_width="160dp"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/IzqItemLow"
             android:textColor="@color/primary_text"
@@ -39,6 +40,7 @@
             android:layout_toRightOf="@+id/txtFecha"></TextView>
 
         <ImageView
+            android:layout_marginLeft="10dp"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:id="@+id/imagenView"
