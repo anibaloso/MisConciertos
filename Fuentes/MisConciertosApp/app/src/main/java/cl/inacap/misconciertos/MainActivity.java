@@ -1,8 +1,5 @@
 package cl.inacap.misconciertos;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +12,9 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -61,8 +61,8 @@ public class MainActivity extends AppCompatActivity {
                 mAdapter = new EventosDAO(MainActivity.this, R.layout.item_row, arrayEventos);
 
                 //TODO validaciones de cada ingreso
-                if(!nombreArtista.getText().toString().isEmpty()){
-                    evento.setNombreArtista(nombreArtista.getText().toString());
+                if(!nombreArtista.getText().toString().trim().isEmpty()){
+                    evento.setNombreArtista(nombreArtista.getText().toString().trim());
                 }else{
                     errores.add("Ingrese un Nombre de Artista o Grupo Musical");
                 }
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
 
                     try{
                         if(Integer.parseInt(valorEntrada.getText().toString()) <= 2147483647){
-                            if((Integer.parseInt(valorEntrada.getText().toString()) >= 0)){
+                            if((Integer.parseInt(valorEntrada.getText().toString()) > 0)){
                                 evento.setPrecioEntrada(Integer.parseInt(valorEntrada.getText().toString()));
                             }else{
                                 errores.add("El valor de la entrada debe ser igual o mayor a cero");

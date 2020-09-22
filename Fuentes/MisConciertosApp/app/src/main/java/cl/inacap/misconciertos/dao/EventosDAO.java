@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -40,7 +41,12 @@ public class EventosDAO extends ArrayAdapter <Eventos> {
         if(view == null) {
             view = LayoutInflater.from(mContext).inflate(resourceLayout, null);
         }
-        DecimalFormat formatear = new DecimalFormat("###,###.##");
+
+        DecimalFormatSymbols simbolo=new DecimalFormatSymbols();
+        simbolo.setDecimalSeparator(',');
+        simbolo.setGroupingSeparator('.');
+        DecimalFormat formatear = new DecimalFormat("###,###.##", simbolo);
+
 
         Eventos eventos = lista.get(position);
 
